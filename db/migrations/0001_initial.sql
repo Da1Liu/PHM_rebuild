@@ -130,6 +130,9 @@ CREATE TABLE phm.evaluation_result (
     evaluation_id      UUID PRIMARY KEY,
     window_id          TEXT NOT NULL REFERENCES phm.feature_window(window_id),
     baseline_id        UUID REFERENCES phm.baseline_model(baseline_id),
+    baseline_identity  UUID GENERATED ALWAYS AS (
+                           COALESCE(baseline_id, '00000000-0000-0000-0000-000000000000'::uuid)
+                       ) STORED,
     state              TEXT NOT NULL CHECK (state IN (
                             'not_evaluable', 'insufficient_data', 'normal',
                             'deviating', 'invalid_data')),
@@ -141,7 +144,7 @@ CREATE TABLE phm.evaluation_result (
     evidence           JSONB NOT NULL DEFAULT '{}'::jsonb,
     reason             TEXT,
     evaluated_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
-    UNIQUE (window_id, baseline_id)
+    UNIQUE (window_id, baseline_identity)
 );
 
 CREATE TABLE phm.maintenance_event (
@@ -164,4 +167,3 @@ CREATE TABLE phm.ingest_checkpoint (
 );
 
 COMMIT;
-

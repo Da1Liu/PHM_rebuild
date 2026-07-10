@@ -13,12 +13,14 @@ dependencies = ["numpy>=1.24"]
 dev = ["pytest>=7.4", "jsonschema>=4.19"]
 
 [tool.setuptools]
-package-dir = {"" = "packages/domain/src", health = "packages/health-core/src"}
+packages = ["phm_domain", "phm_health_core", "phm_application", "phm_persistence"]
 
-[tool.setuptools.packages.find]
-where = ["packages/domain/src", "packages/health-core/src"]
+[tool.setuptools.package-dir]
+phm_domain = "packages/domain/src/phm_domain"
+phm_health_core = "packages/health-core/src/phm_health_core"
+phm_application = "packages/application/src/phm_application"
+phm_persistence = "packages/persistence/src/phm_persistence"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
-
