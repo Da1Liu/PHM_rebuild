@@ -1,6 +1,10 @@
-BEGIN;
-
 CREATE SCHEMA IF NOT EXISTS phm;
+
+CREATE TABLE phm.schema_migration (
+    version            TEXT PRIMARY KEY,
+    checksum_sha256    TEXT NOT NULL,
+    applied_at         TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 
 CREATE TABLE phm.machine (
     machine_id       TEXT PRIMARY KEY,
@@ -165,5 +169,3 @@ CREATE TABLE phm.ingest_checkpoint (
     updated_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
     PRIMARY KEY (consumer_name, source_name)
 );
-
-COMMIT;

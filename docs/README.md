@@ -8,5 +8,6 @@
 - `worker.md`：评价应用服务和幂等边界。
 - `migration-from-legacy.md`：旧项目盘点与迁移决策。
 - `operations/development.md`：本地开发和验证。
+- `operations/database.md`：独立数据库初始化与迁移。
 
 本文档集描述新系统。旧项目文档不自动成为本仓库约束。
