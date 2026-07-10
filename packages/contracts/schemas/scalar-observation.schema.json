@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phm.local/schemas/scalar-observation.schema.json",
+  "title": "ScalarObservation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "messageId", "machineId", "signalCode",
+    "observedAt", "receivedAt", "value", "quality"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "messageId": {"type": "string", "minLength": 1},
+    "machineId": {"type": "string", "minLength": 1},
+    "signalCode": {"type": "string", "minLength": 1},
+    "observedAt": {"type": "string", "format": "date-time"},
+    "receivedAt": {"type": "string", "format": "date-time"},
+    "value": {"type": ["number", "null"]},
+    "quality": {"enum": ["good", "uncertain", "bad", "missing"]},
+    "context": {
+      "type": "object",
+      "additionalProperties": {"type": ["string", "number", "boolean"]}
+    }
+  }
+}
+

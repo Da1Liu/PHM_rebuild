@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phm-rebuild"
+version = "0.1.0"
+description = "Clean-room machine health evidence platform"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "jsonschema>=4.19"]
+
+[tool.setuptools]
+package-dir = {"" = "packages/domain/src", health = "packages/health-core/src"}
+
+[tool.setuptools.packages.find]
+where = ["packages/domain/src", "packages/health-core/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
